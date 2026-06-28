@@ -277,7 +277,6 @@ textarea:focus {
   gap: 12px;
 }
 
-/* Saved cards */
 .list-stack {
   display: grid;
   gap: 14px;
@@ -349,7 +348,70 @@ textarea:focus {
   color: var(--danger);
 }
 
+/* Quick Add Equipment */
+
+.quick-add-card {
+  margin-bottom: 18px;
+}
+
+.quick-add-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.equipment-help {
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.4;
+  margin: 10px 0 14px;
+}
+
+.equipment-picker {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.equipment-option {
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 13px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.equipment-option h3 {
+  margin: 0 0 4px;
+  font-size: 0.96rem;
+}
+
+.equipment-option p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.35;
+}
+
+.add-equipment-btn {
+  background: var(--olive-bright);
+  color: #0c100b;
+  border-radius: 999px;
+  padding: 10px 13px;
+  font-weight: 900;
+}
+
+.full-width-btn {
+  width: 100%;
+  margin-top: 14px;
+}
+
 /* Active workout */
+
 .active-workout {
   position: fixed;
   inset: 0;
