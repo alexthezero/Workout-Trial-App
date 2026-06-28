@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title>Workout Builder</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=30" />
 </head>
 
 <body>
@@ -41,6 +41,7 @@
             <option value="Legs">Legs</option>
             <option value="Upper Body">Upper Body</option>
             <option value="Lower Body">Lower Body</option>
+            <option value="Core">Core</option>
             <option value="Cardio">Cardio</option>
             <option value="Custom">Custom</option>
           </select>
@@ -49,9 +50,35 @@
           <textarea id="workoutNotes" rows="3" placeholder="Focus, warmup, reminders, etc."></textarea>
         </div>
 
+        <div class="card quick-add-card">
+          <div class="quick-add-header">
+            <div>
+              <p class="eyebrow">Planet Fitness Style</p>
+              <h2>Quick Add Equipment</h2>
+            </div>
+          </div>
+
+          <label>Select Workout Area</label>
+          <select id="areaPicker">
+            <option value="upper">Upper Body</option>
+            <option value="lower">Lower Body</option>
+            <option value="core">Core</option>
+          </select>
+
+          <p class="equipment-help">
+            Choose an area, then tap Add beside any machine or exercise you want in your custom workout.
+          </p>
+
+          <div id="equipmentPicker" class="equipment-picker"></div>
+
+          <button id="addCardioBookendsBtn" class="secondary-btn full-width-btn">
+            Add Warm-Up + Cooldown Cardio
+          </button>
+        </div>
+
         <div class="section-title-row">
           <h2>Exercises</h2>
-          <button id="addExerciseBtn" class="small-btn">+ Add</button>
+          <button id="addExerciseBtn" class="small-btn">+ Add Blank</button>
         </div>
 
         <div id="exerciseList"></div>
@@ -105,6 +132,6 @@
     <div id="activeExerciseList" class="active-list"></div>
   </section>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=30"></script>
 </body>
 </html>
