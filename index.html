@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#050706" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Workout Builder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Custom Training</p>
+        <h1>Workout Builder</h1>
+      </div>
+      <div class="logo-mark">WB</div>
+    </header>
+
+    <nav class="tab-bar">
+      <button class="tab-btn active" data-tab="builder">Build</button>
+      <button class="tab-btn" data-tab="saved">Saved</button>
+      <button class="tab-btn" data-tab="history">History</button>
+    </nav>
+
+    <main>
+      <!-- BUILDER -->
+      <section id="builder" class="tab-page active">
+        <div class="card">
+          <label>Workout Name</label>
+          <input id="workoutName" type="text" placeholder="Example: Push Day" />
+
+          <label>Workout Type</label>
+          <select id="workoutType">
+            <option value="Full Body">Full Body</option>
+            <option value="Push">Push</option>
+            <option value="Pull">Pull</option>
+            <option value="Legs">Legs</option>
+            <option value="Upper Body">Upper Body</option>
+            <option value="Lower Body">Lower Body</option>
+            <option value="Cardio">Cardio</option>
+            <option value="Custom">Custom</option>
+          </select>
+
+          <label>Workout Notes</label>
+          <textarea id="workoutNotes" rows="3" placeholder="Focus, warmup, reminders, etc."></textarea>
+        </div>
+
+        <div class="section-title-row">
+          <h2>Exercises</h2>
+          <button id="addExerciseBtn" class="small-btn">+ Add</button>
+        </div>
+
+        <div id="exerciseList"></div>
+
+        <div class="bottom-actions">
+          <button id="clearBuilderBtn" class="secondary-btn">Clear</button>
+          <button id="saveWorkoutBtn" class="primary-btn">Save Workout</button>
+        </div>
+      </section>
+
+      <!-- SAVED -->
+      <section id="saved" class="tab-page">
+        <div class="section-title-row">
+          <h2>Saved Workouts</h2>
+        </div>
+        <div id="savedWorkouts" class="list-stack"></div>
+      </section>
+
+      <!-- HISTORY -->
+      <section id="history" class="tab-page">
+        <div class="section-title-row">
+          <h2>Completed Workouts</h2>
+          <button id="clearHistoryBtn" class="small-btn danger">Clear</button>
+        </div>
+        <div id="historyList" class="list-stack"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ACTIVE WORKOUT SCREEN -->
+  <section id="activeWorkoutScreen" class="active-workout hidden">
+    <div class="active-top">
+      <button id="closeWorkoutBtn" class="icon-btn">×</button>
+      <div>
+        <p class="eyebrow">Workout Mode</p>
+        <h2 id="activeWorkoutTitle">Workout</h2>
+      </div>
+      <button id="finishWorkoutBtn" class="finish-btn">Finish</button>
+    </div>
+
+    <div class="timer-card">
+      <p>Rest Timer</p>
+      <div id="timerDisplay">00:00</div>
+      <div class="timer-actions">
+        <button id="pauseTimerBtn">Pause</button>
+        <button id="resetTimerBtn">Reset</button>
+        <button id="skipTimerBtn">Skip</button>
+      </div>
+    </div>
+
+    <div id="activeExerciseList" class="active-list"></div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
