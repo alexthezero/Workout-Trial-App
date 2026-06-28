@@ -1,10 +1,250 @@
 const STORAGE_KEYS = {
   workouts: "workoutBuilder_savedWorkouts_v1",
-  history: "workoutBuilder_history_v1"
+  history: "workoutBuilder_history_v1",
+  hiddenTemplates: "workoutBuilder_hiddenTemplates_v1"
 };
+
+const DEFAULT_WORKOUT_TEMPLATES = [
+  {
+    templateId: "pf_upper_body_v1",
+    isTemplate: true,
+    name: "PF Upper Body",
+    type: "Upper Body",
+    notes: "Planet Fitness-style upper body workout using common machines and cables. Start light, control the movement, and avoid maxing out.",
+    exercises: [
+      {
+        name: "Treadmill or Elliptical Warm-Up",
+        sets: 1,
+        reps: "5 minutes",
+        weight: "Easy pace",
+        rest: 30,
+        notes: "Start every workout with light cardio to get warm."
+      },
+      {
+        name: "Chest Press Machine",
+        sets: 3,
+        reps: "10-12",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Keep your back against the pad and press under control."
+      },
+      {
+        name: "Lat Pulldown Machine",
+        sets: 3,
+        reps: "10-12",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Pull the bar toward your upper chest. Do not swing."
+      },
+      {
+        name: "Seated Row Machine",
+        sets: 3,
+        reps: "10-12",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Squeeze your shoulder blades together at the back of the movement."
+      },
+      {
+        name: "Shoulder Press Machine",
+        sets: 3,
+        reps: "8-12",
+        weight: "Light to moderate",
+        rest: 75,
+        notes: "Do not lock out hard at the top."
+      },
+      {
+        name: "Pec Deck or Rear Delt Machine",
+        sets: 2,
+        reps: "12-15",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Use controlled reps. Pick pec deck for chest or rear delt for upper back."
+      },
+      {
+        name: "Cable Triceps Pressdown",
+        sets: 2,
+        reps: "10-15",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Keep elbows tucked close to your sides."
+      },
+      {
+        name: "Bicep Curl Machine or Cable Curl",
+        sets: 2,
+        reps: "10-15",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Do not swing your body. Keep tension on the biceps."
+      },
+      {
+        name: "Treadmill Cooldown Walk",
+        sets: 1,
+        reps: "3-5 minutes",
+        weight: "Easy pace",
+        rest: 0,
+        notes: "End with light cardio to bring your heart rate down."
+      }
+    ]
+  },
+  {
+    templateId: "pf_lower_body_v1",
+    isTemplate: true,
+    name: "PF Lower Body",
+    type: "Lower Body",
+    notes: "Planet Fitness-style lower body workout using common machines. Keep the first set lighter, then build into working sets.",
+    exercises: [
+      {
+        name: "Bike or Treadmill Warm-Up",
+        sets: 1,
+        reps: "5 minutes",
+        weight: "Easy pace",
+        rest: 30,
+        notes: "Warm up your legs before lifting."
+      },
+      {
+        name: "Leg Press Machine",
+        sets: 3,
+        reps: "10-12",
+        weight: "Moderate",
+        rest: 90,
+        notes: "Keep feet flat. Do not let your knees cave inward."
+      },
+      {
+        name: "Smith Machine Squat",
+        sets: 3,
+        reps: "8-10",
+        weight: "Light to moderate",
+        rest: 90,
+        notes: "Use a comfortable range of motion. Start light until form feels solid."
+      },
+      {
+        name: "Leg Extension Machine",
+        sets: 3,
+        reps: "10-15",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Pause briefly at the top without jerking the weight."
+      },
+      {
+        name: "Seated or Lying Leg Curl Machine",
+        sets: 3,
+        reps: "10-15",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Control the return. Feel the hamstrings working."
+      },
+      {
+        name: "Hip Abductor Machine",
+        sets: 2,
+        reps: "12-20",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Push outward under control."
+      },
+      {
+        name: "Hip Adductor Machine",
+        sets: 2,
+        reps: "12-20",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Squeeze inward under control."
+      },
+      {
+        name: "Calf Raise Machine or Leg Press Calf Raises",
+        sets: 3,
+        reps: "12-20",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Get a full stretch at the bottom and squeeze at the top."
+      },
+      {
+        name: "Treadmill Cooldown Walk",
+        sets: 1,
+        reps: "3-5 minutes",
+        weight: "Easy pace",
+        rest: 0,
+        notes: "End with a relaxed walk."
+      }
+    ]
+  },
+  {
+    templateId: "pf_core_v1",
+    isTemplate: true,
+    name: "PF Core",
+    type: "Core",
+    notes: "Planet Fitness-style core workout using common ab machines, cables, and bodyweight movements.",
+    exercises: [
+      {
+        name: "Treadmill or Elliptical Warm-Up",
+        sets: 1,
+        reps: "5 minutes",
+        weight: "Easy pace",
+        rest: 30,
+        notes: "Light cardio to warm up before core work."
+      },
+      {
+        name: "Ab Crunch Machine",
+        sets: 3,
+        reps: "12-15",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Crunch with control. Do not yank with your arms."
+      },
+      {
+        name: "Captain’s Chair Knee Raises",
+        sets: 3,
+        reps: "8-12",
+        weight: "Bodyweight",
+        rest: 60,
+        notes: "Lift knees slowly and avoid swinging."
+      },
+      {
+        name: "Cable Wood Chop",
+        sets: 3,
+        reps: "10 each side",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Rotate through your torso, not just your arms."
+      },
+      {
+        name: "Rotary Torso Machine",
+        sets: 2,
+        reps: "10-12 each side",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Move slow and controlled. Do not twist aggressively."
+      },
+      {
+        name: "Plank",
+        sets: 3,
+        reps: "30-45 seconds",
+        weight: "Bodyweight",
+        rest: 60,
+        notes: "Keep your hips level and core tight."
+      },
+      {
+        name: "Back Extension Machine",
+        sets: 2,
+        reps: "12-15",
+        weight: "Bodyweight or light",
+        rest: 60,
+        notes: "This balances the core work by training the lower back."
+      },
+      {
+        name: "Treadmill Cooldown Walk",
+        sets: 1,
+        reps: "3-5 minutes",
+        weight: "Easy pace",
+        rest: 0,
+        notes: "Finish with light cardio."
+      }
+    ]
+  }
+];
 
 let savedWorkouts = [];
 let workoutHistory = [];
+let hiddenTemplateIds = [];
 
 let editingWorkoutId = null;
 let activeSession = null;
@@ -18,6 +258,7 @@ const $ = (id) => document.getElementById(id);
 
 document.addEventListener("DOMContentLoaded", () => {
   loadData();
+  ensureDefaultWorkouts();
   setupTabs();
   setupButtons();
 
@@ -59,11 +300,42 @@ function setupButtons() {
 function loadData() {
   savedWorkouts = JSON.parse(localStorage.getItem(STORAGE_KEYS.workouts)) || [];
   workoutHistory = JSON.parse(localStorage.getItem(STORAGE_KEYS.history)) || [];
+  hiddenTemplateIds = JSON.parse(localStorage.getItem(STORAGE_KEYS.hiddenTemplates)) || [];
 }
 
 function saveData() {
   localStorage.setItem(STORAGE_KEYS.workouts, JSON.stringify(savedWorkouts));
   localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(workoutHistory));
+  localStorage.setItem(STORAGE_KEYS.hiddenTemplates, JSON.stringify(hiddenTemplateIds));
+}
+
+function ensureDefaultWorkouts() {
+  const existingTemplateIds = new Set(
+    savedWorkouts
+      .filter((workout) => workout.templateId)
+      .map((workout) => workout.templateId)
+  );
+
+  const newTemplates = DEFAULT_WORKOUT_TEMPLATES
+    .filter((template) => !existingTemplateIds.has(template.templateId))
+    .filter((template) => !hiddenTemplateIds.includes(template.templateId))
+    .map((template) => {
+      return {
+        ...template,
+        id: makeId(),
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+        exercises: template.exercises.map((exercise) => ({
+          ...exercise,
+          id: makeId()
+        }))
+      };
+    });
+
+  if (newTemplates.length > 0) {
+    savedWorkouts = [...newTemplates, ...savedWorkouts];
+    saveData();
+  }
 }
 
 function makeId() {
@@ -91,11 +363,11 @@ function addExerciseCard(data = {}) {
     <div class="grid-2">
       <div>
         <label>Sets</label>
-        <input class="exercise-sets" type="number" min="1" value="${data.sets || 3}" />
+        <input class="exercise-sets" type="number" min="1" value="${data.sets ?? 3}" />
       </div>
       <div>
         <label>Reps</label>
-        <input class="exercise-reps" type="text" placeholder="8-12" value="${escapeHTML(data.reps || "8-12")}" />
+        <input class="exercise-reps" type="text" placeholder="8-12" value="${escapeHTML(data.reps ?? "8-12")}" />
       </div>
     </div>
 
@@ -106,7 +378,7 @@ function addExerciseCard(data = {}) {
       </div>
       <div>
         <label>Rest Seconds</label>
-        <input class="exercise-rest" type="number" min="0" value="${data.rest || 60}" />
+        <input class="exercise-rest" type="number" min="0" value="${data.rest ?? 60}" />
       </div>
     </div>
 
@@ -174,10 +446,17 @@ function saveWorkout() {
 
   if (editingWorkoutId) {
     const index = savedWorkouts.findIndex((w) => w.id === editingWorkoutId);
+
     if (index !== -1) {
-      workout.createdAt = savedWorkouts[index].createdAt;
+      const existingWorkout = savedWorkouts[index];
+
+      workout.createdAt = existingWorkout.createdAt;
+      workout.isTemplate = existingWorkout.isTemplate || false;
+      workout.templateId = existingWorkout.templateId || null;
+
       savedWorkouts[index] = workout;
     }
+
     editingWorkoutId = null;
     $("saveWorkoutBtn").textContent = "Save Workout";
   } else {
@@ -242,6 +521,7 @@ function renderSavedWorkouts() {
         <p class="meta-line">${escapeHTML(workout.type)} • ${workout.exercises.length} exercises • ${totalSets} sets</p>
 
         <div class="chip-row">
+          ${workout.isTemplate ? `<span class="chip">Preloaded</span>` : ""}
           ${workout.exercises.slice(0, 4).map((ex) => `<span class="chip">${escapeHTML(ex.name)}</span>`).join("")}
           ${workout.exercises.length > 4 ? `<span class="chip">+${workout.exercises.length - 4} more</span>` : ""}
         </div>
@@ -263,10 +543,17 @@ function renderSavedWorkouts() {
 }
 
 function deleteWorkout(id) {
+  const workout = savedWorkouts.find((item) => item.id === id);
+  if (!workout) return;
+
   const confirmed = confirm("Delete this saved workout?");
   if (!confirmed) return;
 
-  savedWorkouts = savedWorkouts.filter((workout) => workout.id !== id);
+  if (workout.templateId && !hiddenTemplateIds.includes(workout.templateId)) {
+    hiddenTemplateIds.push(workout.templateId);
+  }
+
+  savedWorkouts = savedWorkouts.filter((item) => item.id !== id);
   saveData();
   renderSavedWorkouts();
 }
@@ -320,7 +607,7 @@ function renderActiveWorkout() {
       <div class="active-exercise-top">
         <div>
           <h3>${escapeHTML(exercise.name)}</h3>
-          <p>${escapeHTML(exercise.sets)} sets • ${escapeHTML(exercise.reps || "reps")} reps ${exercise.weight ? `• ${escapeHTML(exercise.weight)}` : ""}</p>
+          <p>${escapeHTML(exercise.sets)} set${Number(exercise.sets) === 1 ? "" : "s"} • ${escapeHTML(exercise.reps || "reps")} ${exercise.weight ? `• ${escapeHTML(exercise.weight)}` : ""}</p>
         </div>
         <span class="chip">${exercise.rest || 0}s rest</span>
       </div>
@@ -410,6 +697,7 @@ function startTimer(seconds) {
   timerSeconds = seconds;
   lastTimerSeconds = seconds;
   timerPaused = false;
+  $("pauseTimerBtn").textContent = "Pause";
 
   updateTimerDisplay();
 
