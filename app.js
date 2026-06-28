@@ -53,12 +53,20 @@ const DEFAULT_WORKOUT_TEMPLATES = [
         notes: "Do not lock out hard at the top."
       },
       {
-        name: "Pec Deck or Rear Delt Machine",
+        name: "Pec Deck Machine",
         sets: 2,
         reps: "12-15",
         weight: "Light to moderate",
         rest: 60,
-        notes: "Use controlled reps. Pick pec deck for chest or rear delt for upper back."
+        notes: "Use controlled reps and squeeze your chest."
+      },
+      {
+        name: "Rear Delt Machine",
+        sets: 2,
+        reps: "12-15",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Lead with your elbows and avoid shrugging."
       },
       {
         name: "Cable Triceps Pressdown",
@@ -126,7 +134,7 @@ const DEFAULT_WORKOUT_TEMPLATES = [
         notes: "Pause briefly at the top without jerking the weight."
       },
       {
-        name: "Seated or Lying Leg Curl Machine",
+        name: "Seated Leg Curl Machine",
         sets: 3,
         reps: "10-15",
         weight: "Moderate",
@@ -242,6 +250,305 @@ const DEFAULT_WORKOUT_TEMPLATES = [
   }
 ];
 
+const PF_EQUIPMENT_BY_AREA = {
+  upper: [
+    {
+      equipment: "Chest Press Machine",
+      description: "Chest, shoulders, triceps",
+      exercise: {
+        name: "Chest Press Machine",
+        sets: 3,
+        reps: "10-12",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Keep your back against the pad and press under control."
+      }
+    },
+    {
+      equipment: "Lat Pulldown Machine",
+      description: "Back and biceps",
+      exercise: {
+        name: "Lat Pulldown Machine",
+        sets: 3,
+        reps: "10-12",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Pull toward your upper chest without swinging."
+      }
+    },
+    {
+      equipment: "Seated Row Machine",
+      description: "Middle back and rear shoulders",
+      exercise: {
+        name: "Seated Row Machine",
+        sets: 3,
+        reps: "10-12",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Squeeze your shoulder blades together."
+      }
+    },
+    {
+      equipment: "Shoulder Press Machine",
+      description: "Shoulders and triceps",
+      exercise: {
+        name: "Shoulder Press Machine",
+        sets: 3,
+        reps: "8-12",
+        weight: "Light to moderate",
+        rest: 75,
+        notes: "Press smoothly. Do not lock out aggressively."
+      }
+    },
+    {
+      equipment: "Pec Deck Machine",
+      description: "Chest isolation",
+      exercise: {
+        name: "Pec Deck Machine",
+        sets: 2,
+        reps: "12-15",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Keep the movement controlled and squeeze the chest."
+      }
+    },
+    {
+      equipment: "Rear Delt Machine",
+      description: "Rear shoulders and upper back",
+      exercise: {
+        name: "Rear Delt Machine",
+        sets: 2,
+        reps: "12-15",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Lead with your elbows and avoid shrugging."
+      }
+    },
+    {
+      equipment: "Cable Triceps Pressdown",
+      description: "Triceps",
+      exercise: {
+        name: "Cable Triceps Pressdown",
+        sets: 2,
+        reps: "10-15",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Keep elbows tucked at your sides."
+      }
+    },
+    {
+      equipment: "Bicep Curl Machine",
+      description: "Biceps",
+      exercise: {
+        name: "Bicep Curl Machine",
+        sets: 2,
+        reps: "10-15",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Use controlled reps. Do not swing."
+      }
+    },
+    {
+      equipment: "Cable Curl",
+      description: "Biceps using cable station",
+      exercise: {
+        name: "Cable Curl",
+        sets: 2,
+        reps: "10-15",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Keep elbows close to your sides and curl smoothly."
+      }
+    }
+  ],
+
+  lower: [
+    {
+      equipment: "Leg Press Machine",
+      description: "Quads, glutes, hamstrings",
+      exercise: {
+        name: "Leg Press Machine",
+        sets: 3,
+        reps: "10-12",
+        weight: "Moderate",
+        rest: 90,
+        notes: "Keep feet flat and knees tracking forward."
+      }
+    },
+    {
+      equipment: "Smith Machine Squat",
+      description: "Quads, glutes, full lower body",
+      exercise: {
+        name: "Smith Machine Squat",
+        sets: 3,
+        reps: "8-10",
+        weight: "Light to moderate",
+        rest: 90,
+        notes: "Start light and keep the movement controlled."
+      }
+    },
+    {
+      equipment: "Leg Extension Machine",
+      description: "Quads",
+      exercise: {
+        name: "Leg Extension Machine",
+        sets: 3,
+        reps: "10-15",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Pause briefly at the top."
+      }
+    },
+    {
+      equipment: "Seated Leg Curl Machine",
+      description: "Hamstrings",
+      exercise: {
+        name: "Seated Leg Curl Machine",
+        sets: 3,
+        reps: "10-15",
+        weight: "Moderate",
+        rest: 75,
+        notes: "Control the weight back up."
+      }
+    },
+    {
+      equipment: "Hip Abductor Machine",
+      description: "Outer glutes and hips",
+      exercise: {
+        name: "Hip Abductor Machine",
+        sets: 2,
+        reps: "12-20",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Push outward under control."
+      }
+    },
+    {
+      equipment: "Hip Adductor Machine",
+      description: "Inner thighs",
+      exercise: {
+        name: "Hip Adductor Machine",
+        sets: 2,
+        reps: "12-20",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Squeeze inward under control."
+      }
+    },
+    {
+      equipment: "Calf Raise Machine",
+      description: "Calves",
+      exercise: {
+        name: "Calf Raise Machine",
+        sets: 3,
+        reps: "12-20",
+        weight: "Moderate",
+        rest: 60,
+        notes: "Full stretch at the bottom, squeeze at the top."
+      }
+    },
+    {
+      equipment: "Dumbbell Romanian Deadlift",
+      description: "Hamstrings, glutes, lower back",
+      exercise: {
+        name: "Dumbbell Romanian Deadlift",
+        sets: 3,
+        reps: "8-12",
+        weight: "Light to moderate",
+        rest: 90,
+        notes: "Hinge at the hips, keep your back neutral, and feel the hamstring stretch."
+      }
+    }
+  ],
+
+  core: [
+    {
+      equipment: "Ab Crunch Machine",
+      description: "Abs",
+      exercise: {
+        name: "Ab Crunch Machine",
+        sets: 3,
+        reps: "12-15",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Crunch with control. Do not yank with your arms."
+      }
+    },
+    {
+      equipment: "Captain’s Chair Knee Raises",
+      description: "Lower abs and hip flexors",
+      exercise: {
+        name: "Captain’s Chair Knee Raises",
+        sets: 3,
+        reps: "8-12",
+        weight: "Bodyweight",
+        rest: 60,
+        notes: "Avoid swinging. Lift your knees slowly."
+      }
+    },
+    {
+      equipment: "Cable Wood Chop",
+      description: "Obliques and rotational core",
+      exercise: {
+        name: "Cable Wood Chop",
+        sets: 3,
+        reps: "10 each side",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Rotate through your torso, not just your arms."
+      }
+    },
+    {
+      equipment: "Rotary Torso Machine",
+      description: "Obliques",
+      exercise: {
+        name: "Rotary Torso Machine",
+        sets: 2,
+        reps: "10-12 each side",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Move slowly. Do not twist aggressively."
+      }
+    },
+    {
+      equipment: "Plank",
+      description: "Full core stability",
+      exercise: {
+        name: "Plank",
+        sets: 3,
+        reps: "30-45 seconds",
+        weight: "Bodyweight",
+        rest: 60,
+        notes: "Keep hips level and core tight."
+      }
+    },
+    {
+      equipment: "Back Extension Machine",
+      description: "Lower back and posterior chain",
+      exercise: {
+        name: "Back Extension Machine",
+        sets: 2,
+        reps: "12-15",
+        weight: "Bodyweight or light",
+        rest: 60,
+        notes: "Train the lower back to balance your core work."
+      }
+    },
+    {
+      equipment: "Cable Crunch",
+      description: "Abs using cable station",
+      exercise: {
+        name: "Cable Crunch",
+        sets: 3,
+        reps: "10-15",
+        weight: "Light to moderate",
+        rest: 60,
+        notes: "Round through your abs. Do not just pull with your arms."
+      }
+    }
+  ]
+};
+
 let savedWorkouts = [];
 let workoutHistory = [];
 let hiddenTemplateIds = [];
@@ -263,6 +570,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupButtons();
 
   addExerciseCard();
+  renderEquipmentPicker();
   renderSavedWorkouts();
   renderHistory();
 });
@@ -286,6 +594,9 @@ function setupButtons() {
   $("addExerciseBtn").addEventListener("click", () => addExerciseCard());
   $("saveWorkoutBtn").addEventListener("click", saveWorkout);
   $("clearBuilderBtn").addEventListener("click", clearBuilder);
+
+  $("areaPicker").addEventListener("change", renderEquipmentPicker);
+  $("addCardioBookendsBtn").addEventListener("click", addCardioBookendsToBuilder);
 
   $("closeWorkoutBtn").addEventListener("click", closeWorkoutScreen);
   $("finishWorkoutBtn").addEventListener("click", finishWorkout);
@@ -395,6 +706,18 @@ function addExerciseCard(data = {}) {
   updateExerciseNumbers();
 }
 
+function addExerciseCardAtStart(data = {}) {
+  const list = $("exerciseList");
+
+  addExerciseCard(data);
+
+  const cards = Array.from(document.querySelectorAll(".exercise-card"));
+  const newCard = cards[cards.length - 1];
+
+  list.insertBefore(newCard, list.firstChild);
+  updateExerciseNumbers();
+}
+
 function updateExerciseNumbers() {
   document.querySelectorAll(".exercise-card").forEach((card, index) => {
     card.querySelector(".exercise-number").textContent = index + 1;
@@ -494,6 +817,122 @@ function editWorkout(id) {
 
   $("saveWorkoutBtn").textContent = "Update Workout";
   switchToTab("builder");
+}
+
+/* -----------------------------
+   QUICK ADD EQUIPMENT
+----------------------------- */
+
+function renderEquipmentPicker() {
+  const area = $("areaPicker").value;
+  const container = $("equipmentPicker");
+  const equipmentList = PF_EQUIPMENT_BY_AREA[area] || [];
+
+  container.innerHTML = "";
+
+  equipmentList.forEach((item, index) => {
+    const row = document.createElement("div");
+    row.className = "equipment-option";
+
+    row.innerHTML = `
+      <div>
+        <h3>${escapeHTML(item.equipment)}</h3>
+        <p>${escapeHTML(item.description)}</p>
+      </div>
+      <button class="add-equipment-btn" data-area="${area}" data-index="${index}">
+        Add
+      </button>
+    `;
+
+    row.querySelector(".add-equipment-btn").addEventListener("click", () => {
+      addEquipmentExercise(area, index);
+    });
+
+    container.appendChild(row);
+  });
+}
+
+function addEquipmentExercise(area, index) {
+  const selected = PF_EQUIPMENT_BY_AREA[area][index];
+  if (!selected) return;
+
+  removeBlankStarterExercise();
+
+  const exercise = {
+    ...selected.exercise,
+    id: makeId()
+  };
+
+  addExerciseCard(exercise);
+
+  if (!$("workoutName").value.trim()) {
+    if (area === "upper") $("workoutName").value = "Custom Upper Body Workout";
+    if (area === "lower") $("workoutName").value = "Custom Lower Body Workout";
+    if (area === "core") $("workoutName").value = "Custom Core Workout";
+  }
+
+  if (area === "upper") $("workoutType").value = "Upper Body";
+  if (area === "lower") $("workoutType").value = "Lower Body";
+  if (area === "core") $("workoutType").value = "Core";
+}
+
+function addCardioBookendsToBuilder() {
+  removeBlankStarterExercise();
+
+  const currentExercises = Array.from(document.querySelectorAll(".exercise-card"));
+  const firstName = currentExercises[0]?.querySelector(".exercise-name")?.value.toLowerCase() || "";
+  const lastName = currentExercises[currentExercises.length - 1]?.querySelector(".exercise-name")?.value.toLowerCase() || "";
+
+  const alreadyStartsWithCardio =
+    firstName.includes("warm") ||
+    firstName.includes("treadmill") ||
+    firstName.includes("bike") ||
+    firstName.includes("elliptical");
+
+  const alreadyEndsWithCardio =
+    lastName.includes("cool") ||
+    lastName.includes("treadmill") ||
+    lastName.includes("bike") ||
+    lastName.includes("elliptical");
+
+  if (!alreadyStartsWithCardio) {
+    addExerciseCardAtStart({
+      name: "Treadmill or Elliptical Warm-Up",
+      sets: 1,
+      reps: "5 minutes",
+      weight: "Easy pace",
+      rest: 30,
+      notes: "Start with light cardio to warm up before lifting."
+    });
+  }
+
+  if (!alreadyEndsWithCardio) {
+    addExerciseCard({
+      name: "Treadmill Cooldown Walk",
+      sets: 1,
+      reps: "3-5 minutes",
+      weight: "Easy pace",
+      rest: 0,
+      notes: "End with easy cardio to bring your heart rate down."
+    });
+  }
+
+  updateExerciseNumbers();
+}
+
+function removeBlankStarterExercise() {
+  const cards = Array.from(document.querySelectorAll(".exercise-card"));
+
+  if (cards.length !== 1) return;
+
+  const card = cards[0];
+  const name = card.querySelector(".exercise-name").value.trim();
+  const weight = card.querySelector(".exercise-weight").value.trim();
+  const notes = card.querySelector(".exercise-notes").value.trim();
+
+  if (!name && !weight && !notes) {
+    card.remove();
+  }
 }
 
 /* -----------------------------
