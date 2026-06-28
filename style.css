@@ -1,0 +1,492 @@
+:root {
+  --bg: #050706;
+  --panel: #0d100e;
+  --panel-2: #151a15;
+  --panel-3: #1d241d;
+  --text: #f4f6f2;
+  --muted: #9ca59a;
+  --soft: #c9d1c4;
+  --olive: #8fa35a;
+  --olive-bright: #a9c46a;
+  --olive-dark: #39452c;
+  --danger: #d76c6c;
+  --border: rgba(255, 255, 255, 0.08);
+  --shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+  --radius: 22px;
+  --radius-sm: 14px;
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at top right, rgba(143, 163, 90, 0.18), transparent 35%),
+    radial-gradient(circle at bottom left, rgba(143, 163, 90, 0.08), transparent 40%),
+    var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+}
+
+.app-shell {
+  width: min(100%, 520px);
+  margin: 0 auto;
+  padding: max(18px, env(safe-area-inset-top)) 16px 100px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0 22px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: var(--olive-bright);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  margin-bottom: 0;
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+  letter-spacing: -0.03em;
+}
+
+h3 {
+  margin-bottom: 6px;
+  font-size: 1rem;
+}
+
+.logo-mark {
+  width: 52px;
+  height: 52px;
+  border-radius: 18px;
+  background: linear-gradient(145deg, var(--olive-bright), var(--olive-dark));
+  color: #10140d;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  box-shadow: var(--shadow);
+}
+
+.tab-bar {
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid var(--border);
+  padding: 5px;
+  border-radius: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  margin-bottom: 18px;
+  position: sticky;
+  top: max(8px, env(safe-area-inset-top));
+  z-index: 5;
+  backdrop-filter: blur(18px);
+}
+
+.tab-btn {
+  background: transparent;
+  color: var(--muted);
+  padding: 12px 8px;
+  border-radius: 14px;
+  font-weight: 800;
+}
+
+.tab-btn.active {
+  background: var(--olive);
+  color: #0d100e;
+}
+
+.tab-page {
+  display: none;
+}
+
+.tab-page.active {
+  display: block;
+}
+
+.card,
+.exercise-card,
+.saved-card,
+.history-card,
+.timer-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.025));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.card {
+  margin-bottom: 18px;
+}
+
+label {
+  display: block;
+  margin: 14px 0 7px;
+  color: var(--soft);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+label:first-child {
+  margin-top: 0;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: rgba(5, 7, 6, 0.75);
+  color: var(--text);
+  border-radius: 15px;
+  padding: 13px 14px;
+  outline: none;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(169, 196, 106, 0.65);
+  box-shadow: 0 0 0 4px rgba(169, 196, 106, 0.12);
+}
+
+.section-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 22px 0 12px;
+}
+
+.small-btn,
+.primary-btn,
+.secondary-btn,
+.finish-btn,
+.icon-btn {
+  border-radius: 999px;
+  font-weight: 900;
+}
+
+.small-btn {
+  background: var(--panel-3);
+  color: var(--olive-bright);
+  padding: 9px 13px;
+  border: 1px solid var(--border);
+}
+
+.small-btn.danger {
+  color: var(--danger);
+}
+
+.primary-btn {
+  background: var(--olive-bright);
+  color: #0c100b;
+  padding: 15px 18px;
+  flex: 1;
+  box-shadow: 0 12px 28px rgba(169, 196, 106, 0.22);
+}
+
+.secondary-btn {
+  background: var(--panel-3);
+  color: var(--soft);
+  padding: 15px 18px;
+  border: 1px solid var(--border);
+}
+
+.bottom-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  position: sticky;
+  bottom: 14px;
+}
+
+.exercise-card {
+  margin-bottom: 14px;
+}
+
+.exercise-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.exercise-number {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  background: var(--olive-dark);
+  color: var(--olive-bright);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+
+.remove-exercise {
+  background: rgba(215, 108, 108, 0.12);
+  color: var(--danger);
+  border: 1px solid rgba(215, 108, 108, 0.2);
+  border-radius: 14px;
+  padding: 8px 10px;
+  font-weight: 800;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* Saved cards */
+.list-stack {
+  display: grid;
+  gap: 14px;
+}
+
+.saved-card,
+.history-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.saved-card::before,
+.history-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 5px;
+  background: var(--olive);
+}
+
+.card-content {
+  padding-left: 8px;
+}
+
+.meta-line {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 10px;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.chip {
+  background: rgba(143, 163, 90, 0.13);
+  color: var(--olive-bright);
+  border: 1px solid rgba(143, 163, 90, 0.22);
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.card-actions {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.card-actions button {
+  padding: 11px 10px;
+  border-radius: 14px;
+  font-weight: 900;
+  background: var(--panel-3);
+  color: var(--soft);
+}
+
+.card-actions button.start {
+  background: var(--olive-bright);
+  color: #0c100b;
+}
+
+.card-actions button.delete {
+  color: var(--danger);
+}
+
+/* Active workout */
+.active-workout {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  background:
+    radial-gradient(circle at top right, rgba(143, 163, 90, 0.18), transparent 35%),
+    var(--bg);
+  overflow-y: auto;
+  padding: max(18px, env(safe-area-inset-top)) 16px max(40px, env(safe-area-inset-bottom));
+}
+
+.hidden {
+  display: none;
+}
+
+.active-top {
+  width: min(100%, 520px);
+  margin: 0 auto 16px;
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 12px;
+  align-items: center;
+}
+
+.icon-btn {
+  width: 44px;
+  height: 44px;
+  background: var(--panel-3);
+  color: var(--text);
+  font-size: 1.5rem;
+}
+
+.finish-btn {
+  background: var(--olive-bright);
+  color: #0c100b;
+  padding: 12px 15px;
+}
+
+.timer-card {
+  width: min(100%, 520px);
+  margin: 0 auto 16px;
+  text-align: center;
+}
+
+.timer-card p {
+  color: var(--muted);
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+#timerDisplay {
+  font-size: 3rem;
+  font-weight: 950;
+  letter-spacing: -0.06em;
+}
+
+.timer-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 9px;
+  margin-top: 12px;
+}
+
+.timer-actions button {
+  background: var(--panel-3);
+  color: var(--soft);
+  padding: 11px 10px;
+  border-radius: 14px;
+  font-weight: 900;
+}
+
+.active-list {
+  width: min(100%, 520px);
+  margin: 0 auto;
+  display: grid;
+  gap: 14px;
+}
+
+.active-exercise {
+  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.025));
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.active-exercise-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.active-exercise-top p {
+  color: var(--muted);
+  margin-bottom: 0;
+  font-size: 0.85rem;
+}
+
+.set-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.set-btn {
+  background: var(--panel-3);
+  color: var(--soft);
+  border: 1px solid var(--border);
+  padding: 14px 8px;
+  border-radius: 16px;
+  font-weight: 900;
+}
+
+.set-btn.done {
+  background: var(--olive-bright);
+  color: #0c100b;
+}
+
+.empty-state {
+  color: var(--muted);
+  text-align: center;
+  padding: 28px 12px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
+
+@media (max-width: 390px) {
+  h1 {
+    font-size: 1.7rem;
+  }
+
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .card-actions {
+    grid-template-columns: 1fr;
+  }
+}
